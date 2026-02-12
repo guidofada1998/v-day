@@ -25,7 +25,7 @@ const yesTeasePokes = [
     "Decí que no gay",
     "Dale no seas pt",
     "Me querés arruinar la sorpresa, yo te conozco",
-    "Pone que no o te secuestro a Popo. Gay."
+    "Pone que no o te secuestro a Popo.. digo Pipo. Gay."
 ]
 
 let yesTeasedCount = 0
