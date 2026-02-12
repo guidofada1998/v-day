@@ -19,13 +19,18 @@ const noMessages = [
     "No me hagas esto, pensá en Isabella... 😢",
     "es que ia no me amas? Última oportunidad 🥺",
     "Dale alcanzame gay"
+    
 ]
 
 const yesTeasePokes = [
     "Decí que no gay",
     "Dale no seas pt",
     "Me querés arruinar la sorpresa, yo te conozco",
-    "Pone que no o te secuestro a Popo.. digo Pipo."
+    "Pone que no o te secuestro a Popo.. digo Pipo.",
+    "Decí que sos linda...",
+    "Cuando vos fuiste, yo ya fui y vine como 20 veces..",
+    "A partir de ahora sólo voy a decir que te comportes como una señorita",
+    "Comportate como una señorita por favor"
     
 ]
 
