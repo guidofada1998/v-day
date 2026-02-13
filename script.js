@@ -3,7 +3,7 @@ const gifStages = [
     "https://media1.tenor.com/m/dL4tSN1Kj0oAAAAd/john-cena-what.gif",  // 1 confused
     "https://media1.tenor.com/m/_G-AtuudnzAAAAAd/spongebob-sad.gif",             // 2 pleading
     "https://media1.tenor.com/m/yfMxg16a0CUAAAAd/wojak-rain-wojak.gif",             // 3 sad
-    "https://media1.tenor.com/m/4ZcIoSsLr00AAAAd/panda-lonely.gif",       // 4 sadder
+    "https://media1.tenor.com/m/4ZcIoSsLr00AAAAd/panda-lonely.gif",       // 4 sader
     "https://media.tenor.com/ptbPaU0bAr8AAAAi/why-but-why.gif",             // 5 devastated
     "https://media1.tenor.com/m/_G-AtuudnzAAAAAd/spongebob-sad.gif",               // 6 very devastated
     "https://media.tenor.com/ptbPaU0bAr8AAAAi/why-but-why.gif"  // 7 crying runaway
@@ -19,7 +19,6 @@ const noMessages = [
     "No me hagas esto, pensá en Isabella... 😢",
     "es que ia no me amas? Última oportunidad 🥺",
     "Dale alcanzame gay"
-    
 ]
 
 const yesTeasePokes = [
@@ -31,27 +30,26 @@ const yesTeasePokes = [
     "Cuando vos fuiste, yo ya fui y vine como 20 veces..",
     "A partir de ahora sólo voy a decir que te comportes como una señorita",
     "Comportate como una señorita por favor"
-    
 ]
 
 let yesTeasedCount = 0
-
 let noClickCount = 0
 let runawayEnabled = false
 let musicPlaying = true
 
+// Referencias a los elementos (incluyendo el nuevo GIF)
 const catGif = document.getElementById('cat-gif')
+const catGif2 = document.getElementById('cat-gif-2') // Nuevo
 const yesBtn = document.getElementById('yes-btn')
 const noBtn = document.getElementById('no-btn')
 const music = document.getElementById('bg-music')
 
-// Autoplay: audio starts muted (bypasses browser policy), unmute immediately
+// Autoplay logic
 music.muted = true
 music.volume = 0.3
 music.play().then(() => {
     music.muted = false
 }).catch(() => {
-    // Fallback: unmute on first interaction
     document.addEventListener('click', () => {
         music.muted = false
         music.play().catch(() => {})
@@ -73,7 +71,6 @@ function toggleMusic() {
 
 function handleYesClick() {
     if (!runawayEnabled) {
-        // Tease her to try No first
         const msg = yesTeasePokes[Math.min(yesTeasedCount, yesTeasePokes.length - 1)]
         yesTeasedCount++
         showTeaseMessage(msg)
@@ -93,39 +90,41 @@ function showTeaseMessage(msg) {
 function handleNoClick() {
     noClickCount++
 
-    // Cycle through guilt-trip messages
     const msgIndex = Math.min(noClickCount, noMessages.length - 1)
     noBtn.textContent = noMessages[msgIndex]
 
-    // Grow the Yes button bigger each time
     const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize)
     yesBtn.style.fontSize = `${currentSize * 1.35}px`
     const padY = Math.min(18 + noClickCount * 5, 60)
     const padX = Math.min(45 + noClickCount * 10, 120)
     yesBtn.style.padding = `${padY}px ${padX}px`
 
-    // Shrink No button to contrast
     if (noClickCount >= 2) {
         const noSize = parseFloat(window.getComputedStyle(noBtn).fontSize)
         noBtn.style.fontSize = `${Math.max(noSize * 0.85, 10)}px`
     }
 
-    // Swap cat GIF through stages
+    // Cambiar ambos GIFs al mismo tiempo
     const gifIndex = Math.min(noClickCount, gifStages.length - 1)
     swapGif(gifStages[gifIndex])
 
-    // Runaway starts at click 5
     if (noClickCount >= 5 && !runawayEnabled) {
         enableRunaway()
         runawayEnabled = true
     }
 }
 
+// Función actualizada para manejar 2 GIFs
 function swapGif(src) {
     catGif.style.opacity = '0'
+    if(catGif2) catGif2.style.opacity = '0' // Verificamos que exista
+    
     setTimeout(() => {
         catGif.src = src
+        if(catGif2) catGif2.src = src
+        
         catGif.style.opacity = '1'
+        if(catGif2) catGif2.style.opacity = '1'
     }, 200)
 }
 
