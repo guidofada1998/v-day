@@ -1,12 +1,12 @@
 const gifStages = [
     "https://media1.tenor.com/m/k4_upC5Q3jkAAAAd/cute-cat.gif",    // 0 normal
-    "https://media.tenor.com/hTuJmtxAV5IAAAAj/cat-in-shock-surprises.gif",  // 1 confused
-    "https://media1.tenor.com/m/sIf1VJDSfSkAAAAd/cat-woof.gif",             // 2 pleading
-    "https://media1.tenor.com/m/uve2bxPgGNsAAAAd/upset-crying-cat-meme.gif",             // 3 sad
-    "https://media1.tenor.com/m/CXd26oOq30MAAAAd/sad.gif",       // 4 sadder
-    "https://media1.tenor.com/m/6vT_DoPOzq0AAAAd/sad-cat-cat-in-front-of-sea.gif",             // 5 devastated
-    "https://media1.tenor.com/m/sQf0cT8G5soAAAAd/cat.gif",               // 6 very devastated
-    "https://media1.tenor.com/m/i4XLOir6myMAAAAd/cat-mood.gif"  // 7 crying runaway
+    "https://media1.tenor.com/m/dL4tSN1Kj0oAAAAd/john-cena-what.gif",  // 1 confused
+    "https://media1.tenor.com/m/IvcIg9WI65EAAAAd/please-please-hands.gif",             // 2 pleading
+    "https://media1.tenor.com/m/yfMxg16a0CUAAAAd/wojak-rain-wojak.gif",             // 3 sad
+    "https://media1.tenor.com/m/4ZcIoSsLr00AAAAd/panda-lonely.gif",       // 4 sadder
+    "https://media1.tenor.com/m/zlniVGQw1uoAAAAd/star-tamil-chat-sanjay-chat.gif",             // 5 devastated
+    "https://media1.tenor.com/m/_G-AtuudnzAAAAAd/spongebob-sad.gif",               // 6 very devastated
+    "https://media.tenor.com/ptbPaU0bAr8AAAAi/why-but-why.gif"  // 7 crying runaway
 ]
 
 const noMessages = [
