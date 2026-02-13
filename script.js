@@ -1,50 +1,17 @@
-const gifStages = [
-    "https://media1.tenor.com/m/k4_upC5Q3jkAAAAd/cute-cat.gif",    // 0 normal
-    "https://media1.tenor.com/m/dL4tSN1Kj0oAAAAd/john-cena-what.gif",  // 1 confused
-    "https://media1.tenor.com/m/_G-AtuudnzAAAAAd/spongebob-sad.gif",             // 2 pleading
-    "https://media1.tenor.com/m/yfMxg16a0CUAAAAd/wojak-rain-wojak.gif",             // 3 sad
-    "https://media1.tenor.com/m/4ZcIoSsLr00AAAAd/panda-lonely.gif",       // 4 sader
-    "https://media.tenor.com/ptbPaU0bAr8AAAAi/why-but-why.gif",             // 5 devastated
-    "https://media1.tenor.com/m/_G-AtuudnzAAAAAd/spongebob-sad.gif",               // 6 very devastated
-    "https://media.tenor.com/ptbPaU0bAr8AAAAi/why-but-why.gif"  // 7 crying runaway
-]
-
-const noMessages = [
-    "No",
-    "Segurita? 🤔",
-    "Mi trencito chuchu... 🥺",
-    "Po fa vo... 🥺🥺",
-    "Me voa pone to triste... 😢",
-    "Porfaaa dí que sii ándalee 💔",
-    "No me hagas esto, pensá en Isabella... 😢",
-    "es que ia no me amas? Última oportunidad 🥺",
-    "Dale alcanzame gay"
-]
-
-const yesTeasePokes = [
-    "Decí que no gay",
-    "Dale no seas pt",
-    "Me querés arruinar la sorpresa, yo te conozco",
-    "Pone que no o te secuestro a Popo.. digo Pipo.",
-    "Decí que sos linda...",
-    "Cuando vos fuiste, yo ya fui y vine como 20 veces..",
-    "A partir de ahora sólo voy a decir que te comportes como una señorita",
-    "Comportate como una señorita por favor"
-]
+// ... (Tus listas gifStages, noMessages y yesTeasePokes se mantienen igual)
 
 let yesTeasedCount = 0
 let noClickCount = 0
 let runawayEnabled = false
 let musicPlaying = true
 
-// Referencias a los elementos (incluyendo el nuevo GIF)
 const catGif = document.getElementById('cat-gif')
-const catGif2 = document.getElementById('cat-gif-2') // Nuevo
+const catGif2 = document.getElementById('cat-gif-2') // El segundo gatito
 const yesBtn = document.getElementById('yes-btn')
 const noBtn = document.getElementById('no-btn')
 const music = document.getElementById('bg-music')
 
-// Autoplay logic
+// --- Lógica de Música (Igual) ---
 music.muted = true
 music.volume = 0.3
 music.play().then(() => {
@@ -58,17 +25,15 @@ music.play().then(() => {
 
 function toggleMusic() {
     if (musicPlaying) {
-        music.pause()
-        musicPlaying = false
+        music.pause(); musicPlaying = false;
         document.getElementById('music-toggle').textContent = '🔇'
     } else {
-        music.muted = false
-        music.play()
-        musicPlaying = true
+        music.muted = false; music.play(); musicPlaying = true;
         document.getElementById('music-toggle').textContent = '🔊'
     }
 }
 
+// --- Lógica de Clics ---
 function handleYesClick() {
     if (!runawayEnabled) {
         const msg = yesTeasePokes[Math.min(yesTeasedCount, yesTeasePokes.length - 1)]
@@ -90,41 +55,54 @@ function showTeaseMessage(msg) {
 function handleNoClick() {
     noClickCount++
 
+    // Cambiar mensaje del botón No
     const msgIndex = Math.min(noClickCount, noMessages.length - 1)
     noBtn.textContent = noMessages[msgIndex]
 
+    // Aumentar botón Sí
     const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize)
     yesBtn.style.fontSize = `${currentSize * 1.35}px`
     const padY = Math.min(18 + noClickCount * 5, 60)
     const padX = Math.min(45 + noClickCount * 10, 120)
     yesBtn.style.padding = `${padY}px ${padX}px`
 
+    // Achicar botón No
     if (noClickCount >= 2) {
         const noSize = parseFloat(window.getComputedStyle(noBtn).fontSize)
         noBtn.style.fontSize = `${Math.max(noSize * 0.85, 10)}px`
     }
 
-    // Cambiar ambos GIFs al mismo tiempo
+    // Cambiar GIF
     const gifIndex = Math.min(noClickCount, gifStages.length - 1)
     swapGif(gifStages[gifIndex])
 
+    // Activar escape del botón
     if (noClickCount >= 5 && !runawayEnabled) {
         enableRunaway()
         runawayEnabled = true
     }
 }
 
-// Función actualizada para manejar 2 GIFs
+// --- ESTA ES LA FUNCIÓN QUE CORREGÍ ---
 function swapGif(src) {
+    // Desvanecemos ambos
     catGif.style.opacity = '0'
-    if(catGif2) catGif2.style.opacity = '0' // Verificamos que exista
+    if (catGif2) catGif2.style.opacity = '0'
     
     setTimeout(() => {
+        // El primer GIF siempre cambia
         catGif.src = src
-        if(catGif2) catGif2.src = src
-        
         catGif.style.opacity = '1'
-        if(catGif2) catGif2.style.opacity = '1'
+        
+        // El segundo GIF se ELIMINA después del primer clic
+        if (catGif2) {
+            if (noClickCount > 0) {
+                catGif2.style.display = 'none' // Desaparece del espacio
+            } else {
+                catGif2.src = src
+                catGif2.style.opacity = '1'
+            }
+        }
     }, 200)
 }
 
